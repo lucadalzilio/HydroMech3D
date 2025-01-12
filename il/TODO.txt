@@ -1,0 +1,64 @@
+//==============================================================================
+//
+// Copyright 2018 The InsideLoop Authors. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+//==============================================================================
+
+
+Funny:
+- If x is a floating point > 0, 1/x is not always a floating point
+  Use x = 1.0e-320 or any denormalized number
+
+Think about it:
+- 2018-01-04: The Array2DView can now have a size of n0 x 0 or 0 x n1 with
+              n0 or n1 > 0. The way the data is stored implies that there should
+              be an array of length n.
+              Is it really a problem?
+
+
+
+Changes:
+
+save(object, filename, il::io, status)
+
+- il::HashMapArray<il::String, il::Dynamic>
+- il::HashMap<il::String, il::Dynamic>
+
+load<T>(filename, il::io, status)
+
+- il::HashMapArray
+- il::HashMap
+
+
+<il/Toml.h> -> <il/toml.h>
+
+
+- il::find
+- il::findAll
+- il::findMin
+- il::findMax
+- il::sort
+- il::count
+
+- il::forEach
+
+- il::map
+
+
+
+always return an index
+Therefore, we need we need to get an index for every data structure
+
+- Array2DView should work with 0 size

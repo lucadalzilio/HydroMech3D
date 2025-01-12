@@ -1,0 +1,40 @@
+## Set job parameters
+
+## Job Name
+#PBS -N HMech3DWfly
+
+## Project Funding Code E,g. eee_userid
+#PBS -P eos_luca.dalzilio
+## Queue  Name
+#PBS -q qintel_wfly
+
+## Send email to yourself. Replace the email to your own email.
+#PBS -m bea
+#PBS -M zhenhuan001@e.ntu.edu.sg
+
+## By default error and output files are in format  <job_name>.e<JOB_ID> and <job_name>.o<JOB_ID>.
+## If you don't want in this format, you can change it as follows
+##PBS -o my_output.out
+##PBS -e my_error.err
+
+## Specify walltime in HH:MM:SS
+#PBS -l walltime=120:00:00
+
+## Select 1 hosts (nodes) with 32 cores per Host and launch 32 MPI tasks per host
+#PBS -l select=1:ncpus=32:ompthreads=32
+
+## Load the Application
+source /usr/local/intel/2023.1/setvars.sh
+
+## Capture Number of Cores
+nprocs=`cat $PBS_NODEFILE|wc -l`
+
+## If you have high I/O, you may want to copy your folder to /scratch/$USER
+## cd /scratch/$USER or else you can use the following
+
+cd /home/zhenhuan001/HydroMech3D
+## Inputfile
+inputfile=3DEQSim
+
+## Run mpi program
+./$inputfile -i ./TEST-3DEQSim-P0-Nelts-10201-in.json > $PBS_JOBID.log 2>&1
